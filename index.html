@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#071b15"><title>Poker Jerbinho Online</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+  <header><div class="brand-mark">♠</div><div><h1>Poker Jerbinho Online</h1><p>Texas Hold’em · fichas virtuais · grátis para jogar</p></div><span class="chip">100.000 fichas iniciais</span></header>
+  <main>
+    <section class="panel auth-panel" id="auth-panel">
+      <div class="section-heading"><div><p class="eyebrow">BEM-VINDO À MESA</p><h2>Entre para jogar</h2></div><span class="live-dot">● Online</span></div>
+      <p class="muted">Crie uma conta ou entre com seu e-mail. Não use senha que você utiliza em outros sites.</p>
+      <label>E-mail<input id="email" type="email" placeholder="voce@exemplo.com" autocomplete="email"></label>
+      <label>Senha<input id="password" type="password" placeholder="Mínimo de 6 caracteres" autocomplete="current-password"></label>
+      <div class="button-row"><button id="signup">Criar conta</button><button class="secondary" id="login">Entrar</button></div>
+      <p class="status" id="auth-status" role="status">Configure o Supabase para ativar as contas online.</p>
+    </section>
+
+    <section id="lobby" class="hidden">
+      <div class="welcome-row"><div><p class="eyebrow">SUA ÁREA</p><h2>Salão de Poker</h2><p class="muted" id="user-label"></p></div><button class="secondary small" id="logout">Sair</button></div>
+      <div class="lobby-grid">
+        <section class="panel"><p class="eyebrow">NOVA MESA</p><h3>Crie uma sala</h3>
+          <label>Nome da sala<input id="room-name" maxlength="32" value="Mesa dos amigos"></label>
+          <label>Senha da sala (opcional)<input id="room-password" maxlength="32" type="password" placeholder="Deixe vazio para sala aberta"></label>
+          <label>Limite de jogadores<select id="max-players"><option value="2">2 jogadores</option><option value="6" selected>6 jogadores</option><option value="9">9 jogadores</option></select></label>
+          <button id="create-room">Criar sala</button>
+        </section>
+        <section class="panel"><p class="eyebrow">TEM UM CONVITE?</p><h3>Entrar em uma sala</h3>
+          <label>Código da sala<input id="room-code" maxlength="8" placeholder="Ex.: A1B2C3"></label>
+          <label>Senha da sala (se houver)<input id="join-password" type="password" placeholder="Senha opcional"></label>
+          <button class="secondary" id="join-room">Entrar na sala</button>
+          <p class="muted tiny">Compartilhe o código com seus amigos.</p>
+        </section>
+      </div>
+      <section class="panel"><div class="section-heading"><div><p class="eyebrow">MESAS DISPONÍVEIS</p><h3>Salas públicas</h3></div><button id="refresh-rooms" class="secondary small">Atualizar</button></div><div id="room-list" class="room-list"><p class="muted">Entre na sua conta para carregar as salas.</p></div></section>
+    </section>
+
+    <section id="table-view" class="hidden">
+      <div class="welcome-row"><div><p class="eyebrow">MESA ONLINE</p><h2 id="table-title">Sala</h2><p class="muted">Código: <strong id="table-code"></strong> · Compartilhe com seus amigos</p></div><div class="button-row"><button id="copy-code" class="secondary small">Copiar código</button><button id="leave-room" class="secondary small">Voltar ao salão</button></div></div>
+      <div class="poker-table"><div class="table-top"><span class="table-label">TEXAS HOLD’EM</span><span id="hand-status" class="hand-status">Aguardando jogadores</span></div><div id="community" class="cards community"><span class="card back">♠</span><span class="card back">♥</span><span class="card back">♣</span><span class="card back">♦</span><span class="card back">♠</span></div><div class="pot">POTE <strong id="pot">0</strong></div><div id="seats" class="seats"></div><div class="my-hand-area"><p class="eyebrow">SUAS CARTAS</p><div id="my-hand" class="cards"><span class="card back">?</span><span class="card back">?</span></div><p id="my-stack" class="muted">Fichas: 100.000</p></div></div>
+      <div class="panel table-controls"><div><p class="eyebrow">AÇÕES</p><p id="turn-message" class="muted">Aguardando o início da mão.</p></div><div class="button-row wrap"><button id="start-hand">Iniciar mão</button><button class="secondary" id="check-call">Check / Call</button><button class="secondary" id="raise">Aumentar +1.000</button><button class="danger" id="fold">Desistir</button></div></div>
+      <p id="game-status" class="status" role="status"></p>
+    </section>
+    <footer><span>♠ Poker Jerbinho Online</span><span>Somente fichas virtuais · Sem apostas em dinheiro real</span></footer>
+  </main>
+  <dialog id="password-dialog"><form method="dialog" id="password-form"><h3>Sala protegida</h3><label>Senha da sala<input id="dialog-password" type="password"></label><div class="button-row"><button value="cancel" class="secondary">Cancelar</button><button id="confirm-password" value="join">Entrar</button></div></form></dialog>
+  <script src="app.js"></script>
+</body></html>
